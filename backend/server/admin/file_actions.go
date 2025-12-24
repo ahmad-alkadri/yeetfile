@@ -27,6 +27,10 @@ func deleteFile(fileID string) error {
 		}
 
 		storage.DeleteFileByMetadata(metadata)
+		// Delete metadata and decrement user's send quota
+		db.DeleteMetadata(metadata.ID)
+		db.DeleteUploads(metadata.ID)
+		_ = db.UpdateUserSendUsed(metadata.OwnerID, -int(metadata.Length))
 	}
 
 	return nil

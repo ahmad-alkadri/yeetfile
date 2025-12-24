@@ -22,6 +22,19 @@ const (
 	B2AuthTask     = "b2-auth-task"
 )
 
+// DeleteFileByMetadataWithQuotaUpdate wraps storage.DeleteFileByMetadata to also
+// update the user's send quota when a file expires
+func DeleteFileByMetadataWithQuotaUpdate(metadata db.FileMetadata) {
+	storage.DeleteFileByMetadata(metadata)
+	// Update user's send quota when file expires
+	if len(metadata.OwnerID) > 0 {
+		err := db.UpdateUserSendUsed(metadata.OwnerID, -int(metadata.Length))
+		if err != nil {
+			log.Printf("Error updating user quota when file expired: %v\n", err)
+		}
+	}
+}
+
 type CronTask struct {
 	Name             string
 	Interval         time.Duration
@@ -43,7 +56,7 @@ var tasks = []CronTask{
 		Interval:       time.Second,
 		IntervalAmount: 15,
 		Enabled:        true,
-		TaskFn:         db.CheckExpiry(storage.DeleteFileByMetadata),
+		TaskFn:         db.CheckExpiry(DeleteFileByMetadataWithQuotaUpdate),
 	},
 	{
 		Name:           LimiterTask,

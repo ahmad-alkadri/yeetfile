@@ -23,6 +23,7 @@ type FileMetadata struct {
 	PasswordData      []byte
 	OwnsParentFolder  bool
 	ParentFolderOwner string
+	OwnerID           string
 	Expiration        time.Time
 	Downloads         int
 }
@@ -70,7 +71,7 @@ func MetadataIDExists(id string) bool {
 }
 
 func RetrieveMetadata(id string) (FileMetadata, error) {
-	s := `SELECT m.id, m.chunks, m.filename, m.b2_id, m.length, e.downloads, e.date
+	s := `SELECT m.id, m.chunks, m.filename, m.b2_id, m.length, m.owner_id, e.downloads, e.date
 	      FROM metadata m
 	      JOIN expiry e on m.id = e.id
 	      WHERE m.id = $1`
@@ -116,10 +117,11 @@ func ParseMetadata(rows *sql.Rows) FileMetadata {
 	var name string
 	var b2ID string
 	var length int64
+	var ownerID string
 	var downloads int
 	var date time.Time
 
-	err := rows.Scan(&id, &chunks, &name, &b2ID, &length, &downloads, &date)
+	err := rows.Scan(&id, &chunks, &name, &b2ID, &length, &ownerID, &downloads, &date)
 
 	if err != nil {
 		return FileMetadata{}
@@ -131,6 +133,7 @@ func ParseMetadata(rows *sql.Rows) FileMetadata {
 		Name:       name,
 		B2ID:       b2ID,
 		Length:     length,
+		OwnerID:    ownerID,
 		Downloads:  downloads,
 		Expiration: date,
 	}

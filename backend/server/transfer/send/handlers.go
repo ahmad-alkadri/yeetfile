@@ -315,6 +315,13 @@ func DownloadChunkHandler(w http.ResponseWriter, req *http.Request) {
 
 		if rem == 0 {
 			storage.DeleteFileByMetadata(metadata)
+			// Delete metadata and decrement user's send quota
+			db.DeleteMetadata(metadata.ID)
+			db.DeleteUploads(metadata.ID)
+			err := UpdateUserMeter(-int(metadata.Length), metadata.OwnerID)
+			if err != nil {
+				log.Printf("Error updating user meter when deleting file: %v\n", err)
+			}
 		}
 
 		if rem >= 0 {
