@@ -1,0 +1,6 @@
+*.js
+!ponyfill.min.js
+!jszip.min.js
+!sodium.js
+!pdf.min.mjs
+!pdf.worker.min.mjs
