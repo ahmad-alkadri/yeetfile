@@ -4,13 +4,12 @@ FROM alpine:latest AS builder
 
 WORKDIR /app
 
-RUN apk add --update go npm make git
+RUN apk add --no-cache go npm make git
 RUN npm install -g typescript@5.5.4
 
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY .git/ ./.git
 COPY backend/ ./backend
 COPY utils/ ./utils
 COPY web/ ./web
@@ -19,7 +18,12 @@ COPY tsconfig.json .
 
 COPY Makefile .
 
-RUN git submodule update --init --recursive
+# Manually clone submodules to avoid copying .git
+RUN rm -rf backend/static/stream_saver && \
+    git clone https://github.com/benbusby/StreamSaver.js.git backend/static/stream_saver && \
+    rm -rf backend/static/js && \
+    git clone https://git.sr.ht/~benbusby/yeetfile-js backend/static/js
+
 RUN make backend
 
 # Server image

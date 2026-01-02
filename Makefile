@@ -4,7 +4,7 @@ web:
 	@echo -----------------------------------------
 	@echo "   Updating submodules..."
 	@echo -----------------------------------------
-	git submodule update --init --recursive
+	if [ -d ".git" ]; then git submodule update --init --recursive; fi
 	@echo -----------------------------------------
 	@echo "   Generating TypeScript files from go..."
 	@echo -----------------------------------------
