@@ -3,15 +3,16 @@ package static
 import (
 	"bytes"
 	"embed"
-	"github.com/tdewolff/minify/v2"
-	"github.com/tdewolff/minify/v2/css"
-	"github.com/tdewolff/minify/v2/js"
 	"io"
 	"io/fs"
 	"log"
 	"path/filepath"
 	"strings"
 	"yeetfile/backend/config"
+
+	"github.com/tdewolff/minify/v2"
+	"github.com/tdewolff/minify/v2/css"
+	"github.com/tdewolff/minify/v2/js"
 )
 
 //go:embed js/*.js

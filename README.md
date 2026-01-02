@@ -4,18 +4,14 @@
 
   <p>A privacy-focused encrypted file sending service and file/password vault.</p>
 
-[![Latest Release](https://img.shields.io/github/v/release/benbusby/yeetfile)](https://github.com/benbusby/yeetfile/releases)
-[![License: AGPLv3](https://img.shields.io/github/license/benbusby/yeetfile)](https://opensource.org/license/agpl-v3)
+[![License: AGPLv3](https://img.shields.io/github/license/ahmad-alkadri/yeetfile)](https://opensource.org/license/agpl-v3)
 
-[![Tests (CLI)](https://github.com/benbusby/yeetfile/actions/workflows/go-tests.yml/badge.svg)](https://github.com/benbusby/yeetfile/actions/workflows/go-tests.yml)
-[![Tests (Web)](https://github.com/benbusby/yeetfile/actions/workflows/web-tests.yml/badge.svg)](https://github.com/benbusby/yeetfile/actions/workflows/web-tests.yml)
-[![Vuln Scan](https://github.com/benbusby/yeetfile/actions/workflows/vuln-scan.yml/badge.svg)](https://github.com/benbusby/yeetfile/actions/workflows/vuln-scan.yml)
+[![Tests (CLI)](https://github.com/ahmad-alkadri/yeetfile/actions/workflows/go-tests.yml/badge.svg)](https://github.com/ahmad-alkadri/yeetfile/actions/workflows/go-tests.yml)
+[![Tests (Web)](https://github.com/ahmad-alkadri/yeetfile/actions/workflows/web-tests.yml/badge.svg)](https://github.com/ahmad-alkadri/yeetfile/actions/workflows/web-tests.yml)
+[![Vuln Scan](https://github.com/ahmad-alkadri/yeetfile/actions/workflows/vuln-scan.yml/badge.svg)](https://github.com/ahmad-alkadri/yeetfile/actions/workflows/vuln-scan.yml)
 
 </div>
 <hr>
-
-> [!WARNING]  
-> This project is no longer actively maintained. 
 
 Contents
 1. [About](#about)
@@ -45,8 +41,7 @@ Contents
 ## About
 
 YeetFile is a file vault and file/text transferring service, with both a
-[web](https://yeetfile.com) and [CLI
-client](https://github.com/benbusby/yeetfile/releases) officially supported,
+[web](https://yeetfile.com) and CLI client officially supported,
 and all features of the web client are available from the CLI client.
 
 All content is encrypted locally, and the server is incapable of decrypting any
@@ -466,9 +461,12 @@ paid account upgrades.
 
 ## Support
 
+> [!NOTE]
+> It seems the [original upstream repository](https://github.com/benbusby/yeetfile) is no longer maintained.
+> For questions or issues regarding this fork, please use the issue tracker in this repository.
+
 For feature requests and bugs, you can [create an issue on
-GitHub](https://github.com/benbusby/yeetfile/issues), or [submit
-a ticket on SourceHut (account not required)](https://todo.sr.ht/~benbusby/yeetfile).
+GitHub](https://github.com/ahmad-alkadri/yeetfile/issues).
 
 For issues related to the official YeetFile instance, you can reach out via
 email to [support@yeetfile.com](mailto:support@yeetfile.com).
